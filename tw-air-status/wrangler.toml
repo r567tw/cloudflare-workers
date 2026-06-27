@@ -106,3 +106,7 @@ id = "e0bf5f6a34a3469bb830208534d66824"
 # [[vectorize]]
 # binding = "MY_INDEX"
 # index_name = "my-index"
+
+[observability.logs]
+enabled = true
+invocation_logs = true
