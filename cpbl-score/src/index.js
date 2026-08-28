@@ -46,8 +46,8 @@ async function fetchWithTimeout(resource, options = {}) {
   }
 }
 
-async function fetchGames(targetDate, location = "", kindCode = "A") {
-  const params = new URLSearchParams({ date: targetDate, location, kindCode });
+async function fetchGames(targetDate, kindCode = "A") {
+  const params = new URLSearchParams({ date: targetDate,kind: kindCode });
   const response = await fetchWithTimeout(`${CPBL_API_URL}?${params}`, {
     headers: {
       "User-Agent": "Mozilla/5.0 (compatible; cpbl-score-worker/1.0)",
@@ -76,14 +76,14 @@ export default {
 
     const url = new URL(request.url);
     const date = url.searchParams.get("date") || getDefaultDate();
-    const location = url.searchParams.get("location") || "";
     const kindCode = url.searchParams.get("kindCode") || "A";
+    
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
       return json({ error: "date 必須是 YYYY-MM-DD 格式" }, { status: 400 });
     }
 
     try {
-      const games = await fetchGames(date, location, kindCode);
+      const games = await fetchGames(date, kindCode);
       return json({ date, location, kindCode, count: games.length, games });
     } catch (error) {
       console.error(error);
