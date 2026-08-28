@@ -1,0 +1,12 @@
+https://github.com/icefields/BaseballNpbFetch?utm_source=chatgpt.com
+查詢 韓職 日職的 api 等等
+
+建立一個 location 的 cloudflare 的 workder
+建立一個 location 的 cloudflare 的 workder
+
+npm create cloudflare@latest my-worker
+cd my-worker
+npm install
+npm run dev
+
+npx wrangler secret put AIR_API_KEY
