@@ -47,8 +47,7 @@ async function fetchWithTimeout(resource, options = {}) {
 }
 
 async function fetchGames(targetDate, kindCode = "A") {
-  const params = new URLSearchParams({ date: targetDate,kind: kindCode });
-  const response = await fetchWithTimeout(`${CPBL_API_URL}?${params}`, {
+  const response = await fetchWithTimeout(`${CPBL_API_URL}?date=${targetDate}&kind=${kindCode}`, {
     headers: {
       "User-Agent": "Mozilla/5.0 (compatible; cpbl-score-worker/1.0)",
       Accept: "application/json",
@@ -84,7 +83,7 @@ export default {
 
     try {
       const games = await fetchGames(date, kindCode);
-      return json({ date, location, kindCode, count: games.length, games });
+      return json({ count: games.length, games });
     } catch (error) {
       console.error(error);
       return json({ error: "無法取得 CPBL 賽況", detail: error.message }, { status: 502 });
