@@ -27,11 +27,11 @@ describe('CPBL score worker', () => {
     const response = await worker.fetch(new Request('https://example.com/?date=2026-08-26'));
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({
-      date: '2026-08-26', location: '', kindCode: 'A', count: 1, games
+      count: 1, games
     });
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls[0][0]).toBe(
-      'https://project.r567tw.cc/api/cpbl?date=2026-08-26&location=&kindCode=A'
+      'https://project.r567tw.cc/api/cpbl?date=2026-08-26&kind=A'
     );
   });
 });
